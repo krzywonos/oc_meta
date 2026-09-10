@@ -22,7 +22,7 @@ from oc_ocdm.graph.entities.identifier import Identifier
 from oc_meta.lib.file_manager import find_rdf_file
 from oc_meta.run.meta.generate_csv import load_json_from_file
 
-mp_method = "spawn" if os.name == "nt" else "forkserver"
+mp_method = multiprocessing.get_context("forkserver") if os.name != "nt" else multiprocessing.get_context("spawn")
 
 HAS_IDENTIFIER = "http://purl.org/spar/datacite/hasIdentifier"
 USES_IDENTIFIER_SCHEME = "http://purl.org/spar/datacite/usesIdentifierScheme"
