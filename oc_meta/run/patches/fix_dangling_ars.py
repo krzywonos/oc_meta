@@ -75,8 +75,8 @@ csv.field_size_limit(2**31 - 1)
 _stop_requested = False
 _existing_roles: frozenset[str] = frozenset()
 _target_roles: frozenset[str] = frozenset()
-_fork_context = multiprocessing.get_context("fork")
-_context = multiprocessing.get_context("forkserver")
+_fork_context = multiprocessing.get_context("fork") if os.name != "nt" else multiprocessing.get_context("spawn")
+_context = multiprocessing.get_context("forkserver") if os.name != "nt" else multiprocessing.get_context("spawn")
 
 
 @dataclass(frozen=True, slots=True)
